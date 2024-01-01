@@ -1,8 +1,11 @@
 # Capcut Audio Peaks to Keyframes
 
 ![screenshot](assets/img/screenshot.png)
+###### *Tested on CapCut 2.9.0 Windows app*
 
-Tested on CapCut 2.9.0 Windows app
+LIVE: [https://maestro9.github.io/capcut_audio_to_keyframes/](https://maestro9.github.io/capcut_audio_to_keyframes/)
+
+---
 
 ### Instructions
 
