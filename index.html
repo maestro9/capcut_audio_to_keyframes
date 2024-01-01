@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CapCut | Audio Peaks to Keyframes</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CapCut Audio Peaks to Keyframes">
+  <meta name="keywords" content="CapCut, Audio, Peaks, Keyframes">
+  <meta name="robots" content="index, follow">
+</head>
+<body>
+
+  <div id="app">
+    <h2>Add custom adjustment</h2>
+    <div class="flex">
+
+      <!-- Audio -->
+
+      <div>
+        <h3>Audio</h3>
+
+        <!-- Select file -->
+
+        <div>
+          <label for="audio_file">Select Audio</label>
+          <label for="audio_file" class="input-file">
+            <div class="btn">Select file</div>
+            <input id="audio_file" type="file" accept="audio/*"
+              @change="handleAudioUpload"></input>
+          </label>
+        </div>
+        <hr style="top:5px;margin-bottom:19px;">
+
+        <!-- Threshold -->
+
+        <div>
+          <label for="threshold">Threshold <i>(0-1)</i></label>
+          <input id="threshold" type="number"
+            value="0.7" step="0.01" min="0" max="1"
+            @change="handleThresholdChange"></input>
+        </div>
+
+        <!-- Skip -->
+
+        <div>
+          <label for="skip">Min length <i>(ms)</i></label>
+          <input id="skip" type="number"
+            value="120" step="10" min="10" max="1000"
+            @change="handleSkipChange"></input>
+        </div>
+
+        <!-- Peaks -->
+
+        <div>
+          <label>Peaks</label>
+          {{ peaks.length }}
+        </div>
+
+      </div>
+
+      <!-- Project -->
+
+      <div>
+        <h3>Capcut Project</h3>
+
+        <!-- Select file -->
+
+        <div>
+          <label for="project_file">Select Project</label>
+          <label for="project_file" class="input-file">
+            <div class="btn">Select file</div>
+            <input id="project_file" type="file" accept="application/json"
+              @change="handleProjectUpload"></input>
+          </label>
+        </div>
+        <hr style="top:5px;margin-bottom:19px;">
+
+        <!-- Select adjustment segment -->
+
+        <div>
+          <label for="adjustment_segment">Adjustment Segment</label>
+          <select id="adjustment_segment"
+            @change="selectAdjustmentSegment">
+            <option v-for="x in projectAdjustmentSegments" :key="x.id"
+              :value="x.id">{{ x.name }}</option>
+          </select>
+        </div>
+        <hr style="top:-5px;margin-bottom:9px;">
+
+        <!-- Add adjustment -->
+
+        <div>
+          <label style="width:auto;margin-right:10px;">Adjustments</label>
+          <button id="add_adjustment"
+            @click="addAdjustment">Add</button>
+        </div>
+        <hr style="top:0px;margin-bottom:16px;" v-if="adjustments.length">
+
+        <!-- Adjustments loop -->
+
+        <ul class="adjustments">
+          <li v-for="a in adjustments" :key="a.id">
+            <!-- Type -->
+            <div>
+              <label for="adjustment_type">Type</label>
+              <select id="adjustment_type" v-model="a.type">
+                <option v-for="x in adjustmentTypes" :key="x.value"
+                  :disabled="!x.value" :value="x.value">
+                  {{ x.name }}
+                </option>
+              </select>
+            </div>
+            <!-- Attack -->
+            <div>
+              <label for="adjustment_attack" title="ms">Attack</label>
+              <input id="adjustment_attack" type="number"
+                step="1" min="1" max="100" v-model="a.attack"></input>
+            </div>
+            <!-- Release -->
+            <div>
+              <label for="adjustment_release" title="ms">Release</label>
+              <input id="adjustment_release" type="number"
+                step="10" min="10" max="1000" v-model="a.release"></input>
+            </div>
+            <!-- Base -->
+            <div>
+              <label for="adjustment_base" title="-1-1">Base</label>
+              <input id="adjustment_base" type="number"
+                step="0.01" min="-1" max="1" v-model="a.baseValue"></input>
+            </div>
+            <!-- Peak -->
+            <div>
+              <label for="adjustment_peak" title="-1-1">Peak</label>
+              <input id="adjustment_peak" type="number"
+                step="0.01" min="-1" max="1" v-model="a.peakValue"></input>
+            </div>
+            <!-- Remove -->
+            <div>
+              <label></label>
+              <button @click="removeAdjustment(a.id)">
+                <img src="./assets/img/remove.svg" alt="Remove">
+              </button>
+            </div>
+          </li>
+        </ul>
+        <hr style="top:0px;margin-bottom:16px;">
+
+        <!-- Create keyframes -->
+
+        <div>
+          <button id="create_keyframes"
+            :disabled="buttonDisabled('create_keyframes')"
+            @click="createKeyframes">Create keyframes</button>
+        </div>
+
+      </div>
+
+      <!-- Export -->
+
+      <div>
+        <h3>Export</h3>
+        <div>
+          <button id="export_file"
+            :disabled="buttonDisabled('create_keyframes')"
+            @click="projectExport">Export</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="./assets/js/helpers.js"></script>
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
+
+

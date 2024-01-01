@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Albert+Sans:400,700');
+
+body {
+  background-color: #070709;
+  color: #ffffff;
+  font-family: 'Albert Sans', Arial, sans-serif;
+}
+
+#app {
+  padding: 20px;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+label {
+  color: #ffffff;
+  font-size: 14px;
+  width: 180px;
+  display: inline-block;
+}
+
+label i {
+  opacity: 0.35;
+  font-style: normal;
+}
+
+input[type="number"], button, .btn, select {
+  background-color: #343337;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  height: 26px;
+  cursor: pointer;
+}
+
+input[type="number"], select {
+  width: 120px;
+}
+
+/* Input file */
+
+label.input-file {
+	position: relative;
+	display: inline-block;
+  width: inherit;
+}
+
+label.input-file input[type=file] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}
+
+/* Buttons */
+
+button, .btn {
+  cursor: pointer;
+  background: #00c1cd;
+  display: block;
+  font-weight: 700;
+  transition-duration: .3s;
+}
+
+button:hover, .btn:hover {
+  background: #00a0aa;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 -10px;
+  opacity: 0;
+  transition-duration: 1s;
+}
+
+.flex > div {
+  width: 33%;
+  margin: 10px;
+  padding: 20px;
+  background-color: #1b1b1c;
+  border-radius: 5px;
+}
+
+hr {
+  background: #383838;
+  border: none;
+  height: 0.8px;
+  position: relative;
+}
+
+/* Adjustments */
+
+.adjustments li { display: flex; }
+.adjustments li > div { width: calc(18.75% - 30px/4); padding-right: 10px; }
+.adjustments li > div:first-of-type { width: 25%; }
+.adjustments li > div:last-of-type { width: 30px; }
+.adjustments li > div input,
+.adjustments li > div select { width: 100%; margin-top: 10px; }
+.adjustments li > div button { background: #343337; margin: 10px 0; width: 30px; }
+.adjustments li > div button img { height: 12px; vertical-align: middle; }
+
+ul.adjustments button,
+button#add_adjustment {
+  display: inline-block;
+}
+
+/* Instructions */
+
+.help { margin: 20px; }
+.help ul { list-style: disc; }
+.help li { list-style-position: inside; opacity: 0.35; margin-bottom: 10px; }
+.help ul ul { padding-left: 20px; margin-bottom: 20px; }
